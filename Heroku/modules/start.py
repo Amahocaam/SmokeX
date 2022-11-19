@@ -24,7 +24,7 @@ TIME_DURATION_UNITS = (
 HELP_TEXT = """
 Selam {}
 ➖➖➖➖➖➖➖➖➖➖➖➖➖➖
-✘ Merhaba ben 𝙂𝙧𝙪𝙥 𝙈𝙪̈𝙯𝙞𝙠 🇹🇷
+✘ Merhaba ben Monster Müzik 🇹🇷
 ‣ Grubunuzda müzik müzik oynatabilirim.
 ‣ Beni gruba yönetici olarak ekleyin ve kesintisiz müziğin tadını çıkarın.
 ➖➖➖➖➖➖➖➖➖➖➖➖➖➖
