@@ -37,15 +37,15 @@ async def home(_, query: CallbackQuery):
 @Client.on_callback_query(filters.regex("komut"))
 async def cbkomut(_, query: CallbackQuery):
     await query.edit_message_text(
-        f"""ʜᴇʏʏ [{query.message.chat.first_name}](tg://user?id={query.message.chat.id})
-ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ɢɪᴠᴇɴ ʙᴇʟᴏᴡ ᴛᴏ ᴋɴᴏᴡ ᴍᴏʀᴇ ᴀʙᴏᴜᴛ ᴍᴇ :""",
+        f"""Merhaba [{query.message.chat.first_name}](tg://user?id={query.message.chat.id})
+Aşşağıdaki Butonları Kullanarak Yardım Alabilirsiniz.""",
     reply_markup=InlineKeyboardMarkup(
             [
                 [
                     InlineKeyboardButton(
-                        "Ana Bot", url=f"https://heroku.com"),
+                        "Ana Bot", url=f"https://t.me/MonsterMuzikBot"),
                     InlineKeyboardButton(
-                        "👤 Owner", url=f"https://github.com/Itz-Zaid")
+                        "👤 Owner", url=f"https://t.me/emilyboss")
                 ],
                 [
                     InlineKeyboardButton(
