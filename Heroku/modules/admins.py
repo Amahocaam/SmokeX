@@ -51,11 +51,11 @@ async def member_permissions(chat_id: int, user_id: int):
 from Heroku.setup.administrator import adminsOnly
 
 
-@Client.on_message(command(["pause"]) & other_filters)
+@Client.on_message(command(["durdur"]) & other_filters)
 async def pause(app: Client, message: Message):
     if message.sender_chat:
         return await message.reply_text(
-            "🔴 __You're an **Anonymous Admin**!__\n│\n╰ Revert back to user account from admin rights."
+            "🔴 __Siz bir **Anonim Yöneticisiniz**!__\n│\n╰ Yönetici haklarından kullanıcı hesabına geri dön."
         )
     permission = "can_delete_messages"
     m = await adminsOnly(permission, message)
@@ -65,24 +65,24 @@ async def pause(app: Client, message: Message):
     chat_id = message.chat.id
     if not await is_active_chat(chat_id):
         return await message.reply_text(
-            "• Bot isn't streaming on voice chat."
+            "• Bot sesli sohbette yayın yapmıyor."
         )
     elif not await is_music_playing(message.chat.id):
         return await message.reply_text(
-            "• Bot isn't streaming on voice chat."
+            "• Bot sesli sohbette yayın yapmıyor."
         )
     await music_off(chat_id)
     await calls.pytgcalls.pause_stream(chat_id)
     await message.reply_text(
-        f"• Voicechat Paused by : {checking}"
+        f"• Durduran : {checking}"
     )
 
 
-@Client.on_message(command(["resume"]) & other_filters)
+@Client.on_message(command(["devam"]) & other_filters)
 async def resume(app: Client, message: Message):
     if message.sender_chat:
         return await message.reply_text(
-            "🔴 __You're an **Anonymous Admin**!__\n│\n╰ Revert back to user account from admin rights."
+            "🔴 __Siz bir **Anonim Yöneticisiniz**!__\n│\n╰ Yönetici haklarından kullanıcı hesabına geri dön."
         )
     permission = "can_delete_messages"
     m = await adminsOnly(permission, message)
@@ -92,25 +92,25 @@ async def resume(app: Client, message: Message):
     chat_id = message.chat.id
     if not await is_active_chat(chat_id):
         return await message.reply_text(
-            "❌ __**I dont think if something's paused on voice chat**__"
+            "❌ __**Sesli sohbette bir şeyin duraklatıldığını sanmıyorum**__"
         )
     elif await is_music_playing(chat_id):
         return await message.reply_text(
-            "❌ __**I dont think if something's paused on voice chat**__"
+            "❌ __**Sesli sohbette bir şeyin duraklatıldığını sanmıyorum**__"
         )
     else:
         await music_on(chat_id)
         await calls.pytgcalls.resume_stream(chat_id)
         await message.reply_text(
-            f"• Voicechat Resumed by : {checking}"
+            f"• Devem ettiren : {checking}"
         )
 
 
-@Client.on_message(command(["end"]) & other_filters)
+@Client.on_message(command(["son"]) & other_filters)
 async def stop(app: Client, message: Message):
     if message.sender_chat:
         return await message.reply_text(
-            "🔴 __You're an **Anonymous Admin**!__\n│\n╰ Revert back to user account from admin rights."
+            "🔴 __Siz bir **Anonim Yöneticisiniz**!__\n│\n╰ Yönetici haklarından kullanıcı hesabına geri dön."
         )
     permission = "can_delete_messages"
     m = await adminsOnly(permission, message)
@@ -126,19 +126,19 @@ async def stop(app: Client, message: Message):
         await remove_active_chat(chat_id)
         await calls.pytgcalls.leave_group_call(chat_id)
         await message.reply_text(
-            f"• Streaming ended by : {checking}"
+            f"• Sonlandıran: {checking}"
         )
     else:
         return await message.reply_text(
-            "❌ __**I dont think if something's playing on voice chat**__"
+            "❌ __**Sesli sohbette bir şey çalıyor mu bilmiyorum**__"
         )
 
 
-@Client.on_message(command(["skip"]) & other_filters)
+@Client.on_message(command(["atla"]) & other_filters)
 async def skip(app: Client, message: Message):
     if message.sender_chat:
         return await message.reply_text(
-            "🔴 __You're an **Anonymous Admin**!__\n│\n╰ Revert back to user account from admin rights."
+            "🔴 __Siz bir **Anonim Yöneticisiniz**!__\n│\n╰ Yönetici haklarından kullanıcı hesabına geri dön."
         )
     permission = "can_delete_messages"
     m = await adminsOnly(permission, message)
@@ -148,13 +148,13 @@ async def skip(app: Client, message: Message):
     chat_id = message.chat.id
     chat_title = message.chat.title
     if not await is_active_chat(chat_id):
-        await message.reply_text("❌ __**Nothing's playing on voice chat**__")
+        await message.reply_text("❌ __**Sesli sohbette hiçbir şey çalmıyor**__")
     else:
         task_done(chat_id)
         if is_empty(chat_id):
             await remove_active_chat(chat_id)
             await message.reply_text(
-                "❌ __**No more music in Queue**__\n\n**»** `Leaving Voice Chat...`"
+                "❌ __**Sırada artık müzik yok**__\n\n**»** `Sesli Sohbetten Ayrılıyorum...`"
             )
             await calls.pytgcalls.leave_group_call(chat_id)
             return
@@ -168,15 +168,15 @@ async def skip(app: Client, message: Message):
                 ),
             )
             await message.reply_text(
-                f"• Skipped by : {checking}"
+                f"• Atlatan : {checking}"
             )
 
 
-@Client.on_message(filters.command(["cleandb"]))
+@Client.on_message(filters.command(["temizle"]))
 async def stop_cmd(app: Client, message):
     if message.sender_chat:
         return await message.reply_text(
-            "🔴 __You're an **Anonymous Admin**!__\n│\n╰ Revert back to user account from admin rights."
+            "🔴 __Siz bir **Anonim Yöneticisiniz**!__\n│\n╰ Yönetici haklarından kullanıcı hesabına geri dön."
         )
     permission = "can_delete_messages"
     m = await adminsOnly(permission, message)
@@ -194,5 +194,5 @@ async def stop_cmd(app: Client, message):
     except:
         pass
     await message.reply_text(
-        f"✅ __Erased queues in **{message.chat.title}**__\n│\n╰ Database cleaned by {checking}"
+        f"✅ __Silinen sıralar **{message.chat.title}**__\n│\n╰ Temizleyen {checking}"
     )
