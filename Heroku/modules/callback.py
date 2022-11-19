@@ -26,7 +26,7 @@ async def home(_, query: CallbackQuery):
                     InlineKeyboardButton(
                         "💭 Support", url=f"https://t.me/destekgroup"),
                     InlineKeyboardButton(
-                        "📚 Komutlar", callback_data="others")
+                        "📚 Komutlar", callback_data="komut")
                 ]
            ]
         ),
@@ -34,7 +34,31 @@ async def home(_, query: CallbackQuery):
 
 
 
-
+@Client.on_callback_query(filters.regex("komut"))
+async def cbkomut(_, query: CallbackQuery):
+    await query.edit_message_text(
+        f"""ʜᴇʏʏ [{query.message.chat.first_name}](tg://user?id={query.message.chat.id})
+ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ɢɪᴠᴇɴ ʙᴇʟᴏᴡ ᴛᴏ ᴋɴᴏᴡ ᴍᴏʀᴇ ᴀʙᴏᴜᴛ ᴍᴇ :""",
+    reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        "Ana Bot", url=f"https://heroku.com"),
+                    InlineKeyboardButton(
+                        "👤 Owner", url=f"https://github.com/Itz-Zaid")
+                ],
+                [
+                    InlineKeyboardButton(
+                        "📚 Komutlar", callback_data="credit"),
+                    InlineKeyboardButton(
+                        "❄️ Bot yapımı", callback_data="clonebot")
+                ],
+                [
+                    InlineKeyboardButton("⬅️ Geri", callback_data="home")
+                ]
+           ]
+        ),
+    )
 
 
 @Client.on_callback_query(filters.regex("others"))
@@ -79,10 +103,19 @@ async def reinfo(_, query: CallbackQuery):
         pass
 
 
-@Client.on_callback_query(filters.regex("credit"))
-async def credit(_, query: CallbackQuery):
+@Client.on_callback_query(filters.regex("clonebot"))
+async def clonebot(_, query: CallbackQuery):
     await query.edit_message_text(
-        f"""İşte Tüm Komutlar 🇹🇷\n\n» /oynat => <Şarkı İsmi> Müzik oynatır.\n» /durdur => Müziği dururur.\n» /devam => Müziği sürdürür.\n» /atla => Müziği atlar.\n» /son => Müziği sonlandırır.\n» /bul => Müzik indirir.\n» /katil => Asistanı gruba davet eder.""",
+        f"""Sizde Kendinize Özel Bot Mu Yapmak İstiyorsunuz? O Zaman Doğru Yerdesin. 
+
+Müzik Botu Yapma:
+/clone BOT_TOKEN
+
+Örnek:
+/clone 1234567890:SJYEKFNALFKALCMAMXK
+
+
+Bu Sayede Grubunuz İçin Müzik Botu Yapabilirsiniz.""",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
