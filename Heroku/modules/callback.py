@@ -4,13 +4,12 @@ from pyrogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMa
 from Heroku.config import BOT_NAME, OWNER_USERNAME, UPDATE, SUPPORT, BOT_USERNAME
 
 HELP_TEXT = """
-ʜᴇʏᴀ! [{}](tg://user?id={})
+Selam [{}](tg://user?id={})
 ➖➖➖➖➖➖➖➖➖➖➖➖➖➖
-✘ ɪ'ᴍ ᴊᴜꜱᴛ ɴᴏᴛ ᴀ ᴍᴜꜱɪᴄ ʙᴏᴛ ɪ ʜᴀᴠᴇ ʟᴏᴛꜱ ᴏꜰ ꜰᴇᴀᴛᴜʀᴇꜱ ᴡʜɪᴄʜ ʏᴏᴜ ʟɪᴋᴇꜱ ᴛʜᴀᴛ.
-‣ ɪ ᴄᴀɴ ᴘʟᴀʏ ᴀᴜᴅɪᴏ+ᴠɪᴅᴇᴏ ʙᴏᴛʜ.
-‣ ɪ ʜᴀᴠᴇ ᴀʟᴍᴏꜱᴛ ᴀʟʟ ꜰᴇᴀᴛᴜʀᴇꜱ ᴡʜɪᴄʜ ɴᴇᴇᴅꜱ ᴀ ᴍᴜꜱɪᴄ ʙᴏᴛ
+✘ ✘ Merhaba ben 𝙂𝙧𝙪𝙥 𝙈𝙪̈𝙯𝙞𝙠 🇹🇷
+‣ Grubunuzda müzik müzik oynatabilirim.
+‣ Beni gruba yönetici olarak ekleyin ve kesintisiz müziğin tadını çıkarın.
 ➖➖➖➖➖➖➖➖➖➖➖➖➖➖
-✘ ᴄʟɪᴄᴋ ᴏɴ ʜᴇʟᴘ ʙᴜᴛᴛᴏɴ 🔘 ꜰᴏʀ ᴍᴏʀᴇ ɪɴꜰᴏʀᴍᴀᴛɪᴏɴ ℹ️.
 """
 
 
@@ -21,13 +20,13 @@ async def home(_, query: CallbackQuery):
             [
                 [
                     InlineKeyboardButton(
-                        "✚ ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴀᴅᴅ ᴍᴇ", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")
+                        "✚ Beni Gruba Ekle", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")
                 ],
                 [
                     InlineKeyboardButton(
-                        "📡 ᴄʜᴀɴɴᴇʟ", url=f"https://t.me/{UPDATE}"),
+                        "💭 Support", url=f"https://t.me/destekgroup"),
                     InlineKeyboardButton(
-                        "☁️ ᴏᴛʜᴇʀs", callback_data="others")
+                        "📚 Komutlar", callback_data="others")
                 ]
            ]
         ),
@@ -41,25 +40,17 @@ async def home(_, query: CallbackQuery):
 @Client.on_callback_query(filters.regex("others"))
 async def others(_, query: CallbackQuery):
     await query.edit_message_text(
-        f"""ʜᴇʏʏ [{query.message.chat.first_name}](tg://user?id={query.message.chat.id})
-
-ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ɢɪᴠᴇɴ ʙᴇʟᴏᴡ ᴛᴏ ᴋɴᴏᴡ ᴍᴏʀᴇ ᴀʙᴏᴜᴛ ᴍᴇ :""",
+        f"""ʜᴇʏʏ [{query.message.chat.first_name}](tg://user?id={query.message.chat.id}) İşte Tüm Komutlar 🇹🇷\n\n» /oynat => <Şarkı İsmi> Müzik oynatır.\n» /durdur => Müziği dururur.\n» /devam => Müziği sürdürür.\n» /atla => Müziği atlar.\n» /son => Müziği sonlandırır.\n» /bul => Müzik indirir.\n» /katil => Asistanı gruba davet eder.""",
     reply_markup=InlineKeyboardMarkup(
             [
                 [
                     InlineKeyboardButton(
-                        "🗯️ ʜᴇʀᴏᴋᴜ", url=f"https://heroku.com"),
+                        "🛠️ Kaynak Kod", url=f"https://te.legra.ph/file/bd12f1d8d0a2e893d056c.jpg"),
                     InlineKeyboardButton(
-                        "🌐 ɢɪᴛʜᴜʙ", url=f"https://github.com/Itz-Zaid")
+                        "💝 Owner", url=f"https://t.me/emilyboss")
                 ],
                 [
-                    InlineKeyboardButton(
-                        "🍭 ᴄʀᴇᴅɪᴛs", callback_data="credit"),
-                    InlineKeyboardButton(
-                        "🍀 ʀᴇᴘᴏ ɪɴғᴏ", callback_data="repoinfo")
-                ],
-                [
-                    InlineKeyboardButton("⬅️ ʙᴀᴄᴋ", callback_data="home")
+                    InlineKeyboardButton("⬅️ Geri", callback_data="home")
                 ]
            ]
         ),
@@ -69,17 +60,11 @@ async def others(_, query: CallbackQuery):
 @Client.on_callback_query(filters.regex("credit"))
 async def credit(_, query: CallbackQuery):
     await query.edit_message_text(
-        f"""ᴄʀᴇᴅɪᴛs ғᴏʀ ᴛʜɪs ʙᴏᴛ 🍀
-
-• @{OWNER_USERNAME}
-- ʙᴏᴛ ᴏᴡɴᴇʀ
-
-
-ᴛʜᴀɴᴋs ᴀ ʟᴏᴛ ғᴏʀ ᴄᴏɴᴛʀɪʙᴜᴛɪɴɢ ʏᴏᴜʀ ᴛɪᴍᴇ ᴀɴᴅ sᴋɪʟʟs !!""",
+        f"""İşte Tüm Komutlar 🇹🇷\n\n» /oynat => <Şarkı İsmi> Müzik oynatır.\n» /durdur => Müziği dururur.\n» /devam => Müziği sürdürür.\n» /atla => Müziği atlar.\n» /son => Müziği sonlandırır.\n» /bul => Müzik indirir.\n» /katil => Asistanı gruba davet eder.""",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("⬅️ ʙᴀᴄᴋ", callback_data="others")
+                    InlineKeyboardButton("🗑️ Kapat", callback_data="cls")
                 ],
             ]
         ),
