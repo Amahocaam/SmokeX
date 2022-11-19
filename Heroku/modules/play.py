@@ -175,9 +175,9 @@ async def generate_cover(requested_by, title, views, duration, thumbnail):
     image4.text((670, 332), text=title1[1], fill="white", font = font3, align ="left") 
 
     # description
-    views = f"Views : {views}"
-    duration = f"Duration : {duration} minutes"
-    channel = f"Request : {BOT_NAME} Bot"
+    views = f"İzlenme : {views}"
+    duration = f"Süre : {duration} minutes"
+    channel = f"İsteyen : {BOT_NAME} Bot"
 
     image4.text((670, 410), text=views, fill="white", font = font4, align ="left") 
     image4.text((670, 460), text=duration, fill="white", font = font4, align ="left") 
@@ -194,7 +194,7 @@ async def generate_cover(requested_by, title, views, duration, thumbnail):
 
 # play
 @Client.on_message(
-    command(["play", f"play@{BOT_USERNAME}"])
+    command(["oynat", f"oynat@{BOT_USERNAME}"])
     & filters.group
     & ~filters.edited
     & ~filters.forwarded
@@ -206,39 +206,39 @@ async def play(app: Client, message: Message):
     user_id = message.from_user.id
     if message.sender_chat:
         return await message.reply_text(
-            " __You're an **Anonymous Admin**!__\n│\n╰ Revert back to user account from admin rights."
+            " __Siz bir **Anonim Yöneticisiniz**!__\n│\n╰ Yönetici haklarından kullanıcı hesabına geri dön."
         )
 
     if message.chat.id in DISABLED_GROUPS:
         await message.reply(
-            " __**Music player is turned off, ask the admin to turn on it on!**__"
+            " __**Sesli sohbet kapalı, yöneticiden açmasını isteyin!**__"
         )
       
 
         return
-    lel = await message.reply("🔄 Processing Query... Please Wait!")
+    lel = await message.reply("🔄 İşleniyor...!")
 
     chid = message.chat.id
     aing = await app.get_me()
     c = await app.get_chat_member(message.chat.id, aing.id)
     if c.status != "administrator":
         await lel.edit(
-            f"**Make Sure I'm admin there!!**"
+            f"**Orada yönetici olduğumdan emin ol!!**"
         )
         return
     if not c.can_manage_voice_chats:
         await lel.edit(
-            "**I don't have right : Manage-Voice-Chat**"
+            "**Hakkım yok : Sesli-Sohbeti**"
         )
         return
     if not c.can_delete_messages:
         await lel.edit(
-            "**I don't have right : delete-message**"
+            "**hakkım yok : mesaj silme yetkisi**"
         )
         return
     if not c.can_invite_users:
         await lel.edit(
-            "**I don't have right : invite-users**"
+            "**hakkım yok: kullanıcıları davet etme**"
         )
         return
 
@@ -246,7 +246,7 @@ async def play(app: Client, message: Message):
         b = await app.get_chat_member(message.chat.id, ASSID)
         if b.status == "kicked":
             await message.reply_text(
-                f"🔴 {ASSNAME} (@{ASSUSERNAME}) is banned in your chat **{message.chat.title}**\n\nUnban it first to use music"
+                f"🔴 {ASSNAME} (@{ASSUSERNAME}) sohbetinizde yasaklandı **{message.chat.title}**\n\nMüziği kullanmak için önce yasağı kaldırın"
             )
             return
     except UserNotParticipant:
@@ -254,12 +254,12 @@ async def play(app: Client, message: Message):
             try:
                 await ASS_ACC.join_chat(f"{message.chat.username}")
                 await message.reply(
-                    f"**@{ASSUSERNAME} joined !**",
+                    f"**@{ASSUSERNAME} katıldı !**",
                 )
                 await remove_active_chat(chat_id)
             except Exception as e:
                 await message.reply_text(
-                    f"**@{ASSUSERNAME} failed to join** Add @{ASSUSERNAME} manually in your group.\n\n**Reason**:{e}"
+                    f"**@{ASSUSERNAME} katılamadı** @{ASSUSERNAME} grubunuzda manuel olarak ekleyin."
                 )
                 return
         else:
@@ -277,7 +277,7 @@ async def play(app: Client, message: Message):
                 pass
             except Exception as e:
                 return await message.reply_text(
-                    f"**@{ASSUSERNAME} failed to join** Add @{ASSUSERNAME} manually in your group.\n\n**Reason**:{e}"
+                    f"**@{ASSUSERNAME} katılamadı** @{ASSUSERNAME} grubunuzda manuel olarak ekleyin."
                 )
 
     await message.delete()
@@ -291,13 +291,13 @@ async def play(app: Client, message: Message):
     if audio:
         if round(audio.duration / 60) > DURATION_LIMIT:
             raise DurationLimitError(
-                f"💡 Videos longer than {DURATION_LIMIT} minutes aren't allowed to play!"
+                f"💡 {DURATION_LIMIT} Dakikadan uzun müziklerin oynatılmasına izin verilmez!"
             )
 
         file_name = get_file_name(audio)
         url = f"https://t.me/{UPDATE}"
         title = audio.title
-        thumb_name = "https://telegra.ph/file/a7adee6cf365d74734c5d.png"
+        thumb_name = "https://te.legra.ph/file/b7f217c05f70b4cd9b91f.jpg"
         thumbnail = thumb_name
         duration = round(audio.duration / 60)
         views = "Locally added"
@@ -306,12 +306,12 @@ async def play(app: Client, message: Message):
     [
         
        [
-            InlineKeyboardButton("📂 𝗦𝘂𝗽𝗽𝗼𝗿𝘁", url=f"t.me/{SUPPORT}"),
-            InlineKeyboardButton("✨ 𝗖𝗵𝗮𝗻𝗻𝗲𝗹", url=f"t.me/{UPDATE}"),
+            InlineKeyboardButton("📚 Komutlar", callback_data="credit"),
+            InlineKeyboardButton("💭 Support", url=f"t.me/{UPDATE}"),
         ],[
-            InlineKeyboardButton("🎥 𝗪𝗮𝘁𝗰𝗵 𝗼𝗻 𝗬𝗼𝘂𝗧𝘂𝗯𝗲", url=f"{url}"),
+            InlineKeyboardButton("🎥 İzle", url=f"{url}"),
         ],[
-            InlineKeyboardButton("🗑️ 𝗖𝗹𝗼𝘀𝗲", callback_data="cls"),
+            InlineKeyboardButton("🗑️ Kapat", callback_data="cls"),
         ],
         
     ]
@@ -349,12 +349,12 @@ async def play(app: Client, message: Message):
     [
         
        [
-            InlineKeyboardButton("📂 𝗦𝘂𝗽𝗽𝗼𝗿𝘁", url=f"t.me/{SUPPORT}"),
-            InlineKeyboardButton("✨ 𝗖𝗵𝗮𝗻𝗻𝗲𝗹", url=f"t.me/{UPDATE}"),
+            InlineKeyboardButton("📚 Komutlar", callback_data="credit"),
+            InlineKeyboardButton("💭 Support", url=f"t.me/{UPDATE}"),
         ],[
-            InlineKeyboardButton("🎥 𝗪𝗮𝘁𝗰𝗵 𝗼𝗻 𝗬𝗼𝘂𝗧𝘂𝗯𝗲", url=f"{url}"),
+            InlineKeyboardButton("🎥 İzle", url=f"{url}"),
         ],[
-            InlineKeyboardButton("🗑️ 𝗖𝗹𝗼𝘀𝗲", callback_data="cls"),
+            InlineKeyboardButton("🗑️ Kapat", callback_data="cls"),
         ],
         
     ]
@@ -362,7 +362,7 @@ async def play(app: Client, message: Message):
 
         except Exception as e:
             title = "NaN"
-            thumb_name = "https://telegra.ph/file/a7adee6cf365d74734c5d.png"
+            thumb_name = "https://te.legra.ph/file/b7f217c05f70b4cd9b91f.jpg"
             duration = "NaN"
             views = "NaN"
             keyboard = InlineKeyboardMarkup(
@@ -371,7 +371,7 @@ async def play(app: Client, message: Message):
 
         if (dur / 60) > DURATION_LIMIT:
             await lel.edit(
-                f"💡 Videos longer than {DURATION_LIMIT} minutes aren't allowed to play!"
+                f"💡 {DURATION_LIMIT} Dakikadan uzun müziklerin oynatılmasına izin verilmez!"
             )
             return
         requested_by = message.from_user.first_name
@@ -395,7 +395,7 @@ async def play(app: Client, message: Message):
                     try:
                         if eta > 2:
                             lel.edit(
-                                f"ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ {title[:50]}\n\n**ғɪʟᴇ sɪᴢᴇ :** {size}\n**ᴘʀᴏɢʀᴇss :** {percentage}\n**sᴘᴇᴇᴅ :** {speed}\n**ᴇᴛᴀ :** {eta} sec"
+                                f"İndiriliyor {title[:50]}\n\n**Dosya :** {size}\n**İşleniyor :** {percentage}\n**Hız :** {speed}\n**ᴇᴛᴀ :** {eta} sec"
                             )
                     except Exception as e:
                         pass
@@ -404,30 +404,30 @@ async def play(app: Client, message: Message):
                         flex[str(bytesx)] += 1
                         if eta > 2:
                             lel.edit(
-                                f"**ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ :** {title[:50]}..\n\n**ғɪʟᴇ sɪᴢᴇ :** {size}\n**ᴘʀᴏɢʀᴇss :** {percentage}\n**sᴘᴇᴇᴅ :** {speed}\n**ᴇᴛᴀ :** {eta} sec"
+                                f"**İndiriliyor :** {title[:50]}..\n\n**Dosya :** {size}\n**İşleniyor :** {percentage}\n**Hız :** {speed}\n**ᴇᴛᴀ :** {eta} sec"
                             )
                         print(
-                            f"[{url_suffix}] Downloaded {percentage} at a speed of {speed} | ETA: {eta} seconds"
+                            f"[{url_suffix}] İndirildi {percentage} hızında {speed} | ETA: {eta} saniye"
                         )
                 if per > 500:
                     if flex[str(bytesx)] == 3:
                         flex[str(bytesx)] += 1
                         if eta > 2:
                             lel.edit(
-                                f"**ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ** {title[:50]}...\n\n**ғɪʟᴇ sɪᴢᴇ :** {size}\n**ᴘʀᴏɢʀᴇss :** {percentage}\n**sᴘᴇᴇᴅ :** {speed}\n**ᴇᴛᴀ :** {eta} sec"
+                                f"**İndiriliyor** {title[:50]}...\n\n**Dosya :** {size}\n**İşleniyor :** {percentage}\n**Hız :** {speed}\n**ᴇᴛᴀ :** {eta} sec"
                             )
                         print(
-                            f"[{url_suffix}] Downloaded {percentage} at a speed of {speed} | ETA: {eta} seconds"
+                            f"[{url_suffix}] İndirildi {percentage} hızında {speed} | ETA: {eta} saniye"
                         )
                 if per > 800:
                     if flex[str(bytesx)] == 4:
                         flex[str(bytesx)] += 1
                         if eta > 2:
                             lel.edit(
-                                f"**ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ :** {title[:50]}....\n\n**ғɪʟᴇ sɪᴢᴇ :** {size}\n**ᴘʀᴏɢʀᴇss :** {percentage}\n**sᴘᴇᴇᴅ :** {speed}\n**ᴇᴛᴀ :** {eta} sec"
+                                f"**İndiriliyor :** {title[:50]}....\n\n**dosya :** {size}\n**işleniyor :** {percentage}\n**hız :** {speed}\n**ᴇᴛᴀ :** {eta} sec"
                             )
                         print(
-                            f"[{url_suffix}] Downloaded {percentage} at a speed of {speed} | ETA: {eta} seconds"
+                            f"[{url_suffix}] İndirildi {percentage} hızında {speed} | ETA: {eta} saniye"
                         )
             if d["status"] == "finished":
                 try:
@@ -436,9 +436,9 @@ async def play(app: Client, message: Message):
                     taken = "00:00"
                 size = d["_total_bytes_str"]
                 lel.edit(
-                    f"**ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ :** {title[:50]}.....\n\n**ғɪʟᴇ sɪᴢᴇ :** {size}\n**ᴛɪᴍᴇ :** {taken} sec\n\n**ᴄᴏɴᴠᴇʀᴛɪɴɢ ғɪʟᴇ : **[__FFmpeg processing__]"
+                    f"**İndiriliyor :** {title[:50]}.....\n\n**dosya :** {size}\n**süre :** {taken} sec\n\n**dosya dönüştürülüyor : **[__FFmpeg işlemede__]"
                 )
-                print(f"[{url_suffix}] Downloaded| Elapsed: {taken} seconds")
+                print(f"[{url_suffix}] İndirildi| Geçen süre: {taken} saniye")
 
         loop = asyncio.get_event_loop()
         x = await loop.run_in_executor(None, download, url, my_hook)
@@ -446,12 +446,12 @@ async def play(app: Client, message: Message):
     else:
         if len(message.command) < 2:
             return await lel.edit(
-                "**Usage**: /play [Music Name or Youtube Link or Reply to Audio]"
+                "**Kullanım**: /oynat [Müzik Adı veya Youtube Bağlantısı veya Sesi Yanıtla]"
             )
-        await lel.edit("**🔄 Processing Query... Please Wait!**")
+        await lel.edit("**🔄 İşleniyor...!**")
         query = message.text.split(None, 1)[1]
         # print(query)
-        await lel.edit("**Featching details**")
+        await lel.edit("**🔄 Yükleniyor**")
         try:
             results = YoutubeSearch(query, max_results=5).to_dict()
             url = f"https://youtube.com{results[0]['url_suffix']}"
@@ -474,7 +474,7 @@ async def play(app: Client, message: Message):
 
         except Exception as e:
             await lel.edit(
-                "• **Song not found**\n\nwrite name correctly."
+                "• **Şarkı bulunamadı**\n\nTekrar deneyiniz."
             )
             print(str(e))
             return
@@ -482,12 +482,12 @@ async def play(app: Client, message: Message):
         keyboard = InlineKeyboardMarkup(
     [
        [
-            InlineKeyboardButton("📂 𝗦𝘂𝗽𝗽𝗼𝗿𝘁", url=f"t.me/{SUPPORT}"),
-            InlineKeyboardButton("✨ 𝗖𝗵𝗮𝗻𝗻𝗲𝗹", url=f"t.me/{UPDATE}"),
+            InlineKeyboardButton("📚 Komutlar", callback_data="credit"),
+            InlineKeyboardButton("💭 Support", url=f"t.me/{UPDATE}"),
         ],[
-            InlineKeyboardButton("🎥 𝗪𝗮𝘁𝗰𝗵 𝗼𝗻 𝗬𝗼𝘂𝗧𝘂𝗯𝗲", url=f"{url}"),
+            InlineKeyboardButton("🎥 İzle", url=f"{url}"),
         ],[
-            InlineKeyboardButton("🗑️ 𝗖𝗹𝗼𝘀𝗲", callback_data="cls"),
+            InlineKeyboardButton("🗑️ Kapat", callback_data="cls"),
         ],
         
     ]
@@ -495,7 +495,7 @@ async def play(app: Client, message: Message):
 
         if (dur / 60) > DURATION_LIMIT:
             await lel.edit(
-                f"💡 Videos longer than {DURATION_LIMIT} minutes aren't allowed to play!"
+                f"💡 {DURATION_LIMIT} Dakikadan uzun müziklerin oynatılmasına izin verilmez!"
             )
             return
         requested_by = message.from_user.first_name
@@ -519,7 +519,7 @@ async def play(app: Client, message: Message):
                     try:
                         if eta > 2:
                             lel.edit(
-                                f"ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ {title[:50]}\n\n**ғɪʟᴇ sɪᴢᴇ :** {size}\n**ᴘʀᴏɢʀᴇss :** {percentage}\n**sᴘᴇᴇᴅ :** {speed}\n**ᴇᴛᴀ :** {eta} sec"
+                                f"İndiriliyor {title[:50]}\n\n**dosya :** {size}\n**işleniyor :** {percentage}\n**hız :** {speed}\n**ᴇᴛᴀ :** {eta} sec"
                             )
                     except Exception as e:
                         pass
@@ -528,30 +528,30 @@ async def play(app: Client, message: Message):
                         flex[str(bytesx)] += 1
                         if eta > 2:
                             lel.edit(
-                                f"**ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ :** {title[:50]}..\n\n**ғɪʟᴇ sɪᴢᴇ :** {size}\n**ᴘʀᴏɢʀᴇss :** {percentage}\n**sᴘᴇᴇᴅ :** {speed}\n**ᴇᴛᴀ :** {eta} sec"
+                                f"**İndiriliyor :** {title[:50]}..\n\n**dosya :** {size}\n**işleniyor :** {percentage}\n**hız :** {speed}\n**ᴇᴛᴀ :** {eta} sec"
                             )
                         print(
-                            f"[{url_suffix}] Downloaded {percentage} at a speed of {speed} | ETA: {eta} seconds"
+                            f"[{url_suffix}] İndirildi {percentage} hızında {speed} | ETA: {eta} saniye"
                         )
                 if per > 500:
                     if flex[str(bytesx)] == 3:
                         flex[str(bytesx)] += 1
                         if eta > 2:
                             lel.edit(
-                                f"**ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ** {title[:50]}...\n\n**ғɪʟᴇ sɪᴢᴇ :** {size}\n**ᴘʀᴏɢʀᴇss :** {percentage}\n**sᴘᴇᴇᴅ :** {speed}\n**ᴇᴛᴀ :** {eta} sec"
+                                f"**İndiriliyor** {title[:50]}...\n\n**dosya :** {size}\n**işleniyor :** {percentage}\n**hız :** {speed}\n**ᴇᴛᴀ :** {eta} sec"
                             )
                         print(
-                            f"[{url_suffix}] Downloaded {percentage} at a speed of {speed} | ETA: {eta} seconds"
+                            f"[{url_suffix}] İndirildi {percentage} hızında {speed} | ETA: {eta} saniye"
                         )
                 if per > 800:
                     if flex[str(bytesx)] == 4:
                         flex[str(bytesx)] += 1
                         if eta > 2:
                             lel.edit(
-                                f"**ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ :** {title[:50]}....\n\n**ғɪʟᴇ sɪᴢᴇ :** {size}\n**ᴘʀᴏɢʀᴇss :** {percentage}\n**sᴘᴇᴇᴅ :** {speed}\n**ᴇᴛᴀ :** {eta} sec"
+                                f"**İndiriliyor :** {title[:50]}....\n\n**dosya :** {size}\n**işleniyor :** {percentage}\n**hız :** {speed}\n**ᴇᴛᴀ :** {eta} sec"
                             )
                         print(
-                            f"[{url_suffix}] Downloaded {percentage} at a speed of {speed} | ETA: {eta} seconds"
+                            f"[{url_suffix}] İndirildi {percentage} hızında {speed} | ETA: {eta} saniye"
                         )
             if d["status"] == "finished":
                 try:
@@ -560,9 +560,9 @@ async def play(app: Client, message: Message):
                     taken = "00:00"
                 size = d["_total_bytes_str"]
                 lel.edit(
-                    f"**Download Finished!!**\n\n**{title[:50]}...\n\n**Audio Size : {size}**\n■■■■■■■■■■ `100%`\n**Time taken: {taken} sec**\n\n<b> __Converting to ffmpeg__....</b>"
+                    f"**İndirme Bitti!!**\n\n**{title[:50]}...\n\n**Audio Boyutu : {size}**\n■■■■■■■■■■ `100%`\n**Geçen süre: {taken} sec**\n\n<b> __ffmpeg'e dönüştürülüyor__....</b>"
                 )
-                print(f"[{url_suffix}] Downloaded| Elapsed: {taken} seconds")
+                print(f"[{url_suffix}] İndirildi| Geçen süre: {taken} seconds")
 
         loop = asyncio.get_event_loop()
         x = await loop.run_in_executor(None, download, url, my_hook)
@@ -572,7 +572,7 @@ async def play(app: Client, message: Message):
         position = await queues.put(message.chat.id, file=file_path)
         await message.reply_photo(
             photo="final.png",
-            caption="ꜱᴏɴɢ ɪɴ Qᴜᴇᴜᴇ #{}\n**📂 ᴛɪᴛʟᴇ:**[{}]({})\n\n👥 ᴀᴅᴅᴇᴅ ʙʏ: {}".format(
+            caption="ꜱᴏɴɢ ɪɴ Qᴜᴇᴜᴇ #{}\n**🏷️ Başlık:**[{}]({})\n\n👥 Talep eden: {}".format(
                 position, title, url, message.from_user.mention()
             ),
         )
@@ -589,7 +589,7 @@ async def play(app: Client, message: Message):
             )
         except Exception:
             return await lel.edit(
-                "Error Joining Voice Chat. Make sure Voice Chat is Enabled.\n\n If YES, then make sure Music Bots Assistant is not banned in your group or available in your group!"
+                "Sesli Sohbete Katılma Hatası. Sesli Sohbetin Etkin olduğundan emin olun.\n\n EVET ise, Music Bots Assistant'ın grubunuzda yasaklanmadığından veya grubunuzda bulunmadığından emin olun.!"
             )
 
 
@@ -598,7 +598,7 @@ async def play(app: Client, message: Message):
         await message.reply_photo(
             photo="final.png",
             reply_markup=keyboard,
-            caption="**📂 ᴛɪᴛʟᴇ**:[{}]({})\n\n👥 ᴀᴅᴅᴇᴅ ʙʏ:{}".format(
+            caption="**🏷️ Başlık**:[{}]({})\n\n👥 Talep eden:{}".format(
                 title, url, message.from_user.mention()
             ),
         )
