@@ -22,13 +22,12 @@ TIME_DURATION_UNITS = (
 )
 
 HELP_TEXT = """
-ʜᴇʏᴀ! {}
+Selam {}
 ➖➖➖➖➖➖➖➖➖➖➖➖➖➖
-✘ ɪ'ᴍ ᴊᴜꜱᴛ ɴᴏᴛ ᴀ ᴍᴜꜱɪᴄ ʙᴏᴛ ɪ ʜᴀᴠᴇ ʟᴏᴛꜱ ᴏꜰ ꜰᴇᴀᴛᴜʀᴇꜱ ᴡʜɪᴄʜ ʏᴏᴜ ʟɪᴋᴇꜱ ᴛʜᴀᴛ.
-‣ ɪ ᴄᴀɴ ᴘʟᴀʏ ᴀᴜᴅɪᴏ+ᴠɪᴅᴇᴏ ʙᴏᴛʜ.
-‣ ɪ ʜᴀᴠᴇ ᴀʟᴍᴏꜱᴛ ᴀʟʟ ꜰᴇᴀᴛᴜʀᴇꜱ ᴡʜɪᴄʜ ɴᴇᴇᴅꜱ ᴀ ᴍᴜꜱɪᴄ ʙᴏᴛ.
+✘ Merhaba ben 𝙂𝙧𝙪𝙥 𝙈𝙪̈𝙯𝙞𝙠 🇹🇷
+‣ Grubunuzda müzik müzik oynatabilirim.
+‣ Beni gruba yönetici olarak ekleyin ve kesintisiz müziğin tadını çıkarın.
 ➖➖➖➖➖➖➖➖➖➖➖➖➖➖
-✘ ᴄʟɪᴄᴋ ᴏɴ ʜᴇʟᴘ ʙᴜᴛᴛᴏɴ 🔘 ꜰᴏʀ ᴍᴏʀᴇ ɪɴꜰᴏʀᴍᴀᴛɪᴏɴ ℹ️.
 """
 
 
@@ -39,13 +38,13 @@ async def start_(client: Client, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "✚ ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴀᴅᴅ ᴍᴇ", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")
+                        "✚ Beni Gruba Ekle", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")
                 ],
                 [
                     InlineKeyboardButton(
-                        "📡 ᴄʜᴀɴɴᴇʟ", url=f"https://t.me/{UPDATE}"),
+                        "💭 Support", url=f"https://t.me/destekgroup"),
                     InlineKeyboardButton(
-                        "☁️ ᴏᴛʜᴇʀs", callback_data="others")
+                        "📚 Komutlar", callback_data="others")
                 ]
            ]
         ),
