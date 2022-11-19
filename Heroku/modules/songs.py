@@ -15,7 +15,7 @@ def time_to_seconds(time):
     return sum(int(x) * 60**i for i, x in enumerate(reversed(stringt.split(":"))))
 
 
-@Client.on_message(command(["song"]))
+@Client.on_message(command(["bul"]))
 def song(client, message):
 
     user_id = message.from_user.id
@@ -24,7 +24,7 @@ def song(client, message):
 
     query = "".join(" " + str(i) for i in message.command[1:])
     print(query)
-    m = message.reply("🔎 __Featching Your Query__")
+    m = message.reply("🔎 __Arıyorum__")
     ydl_opts = {"format": "bestaudio[ext=m4a]"}
     try:
         results = YoutubeSearch(query, max_results=5).to_dict()
@@ -42,17 +42,17 @@ def song(client, message):
 
     except Exception as e:
         m.edit(
-            "❌ Ntg Found!!"
+            "❌ Hata!!"
         )
         print(str(e))
         return
-    m.edit("Downloding Your Query....")
+    m.edit("📥 İndiriliyor....")
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(link, download=False)
             audio_file = ydl.prepare_filename(info_dict)
             ydl.process_info(info_dict)
-        rep = f"🎙 **sᴏɴɢ**: [{title[:35]}]({link})\n🎬 **sᴏᴜʀᴄᴇ**: YouTube\n⏱️ **ᴅᴜʀᴀᴛɪᴏɴ**: `{duration}`\n👁‍🗨 **ᴠɪᴇᴡs**: `{views}`\n📤 **ᴜᴘʟᴏᴀᴅᴇʀ**: @{BOT_USERNAME}"
+        rep = f"🎙 **Şarkı**: [{title[:35]}]({link})\n🎬 **Kaynak**: YouTube\n⏱️ **Süre**: `{duration}`\n👁‍🗨 **İzlenme**: `{views}`\n📤 **Yükleyen**: @{BOT_USERNAME}"
         secmul, dur, dur_arr = 1, 0, duration.split(":")
         for i in range(len(dur_arr) - 1, -1, -1):
             dur += int(dur_arr[i]) * secmul
