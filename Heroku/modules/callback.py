@@ -79,20 +79,16 @@ async def reinfo(_, query: CallbackQuery):
         pass
 
 
-@Client.on_callback_query(filters.regex("repoinfo"))
-async def repoinfo(_, query: CallbackQuery):
+@Client.on_callback_query(filters.regex("credit"))
+async def credit(_, query: CallbackQuery):
     await query.edit_message_text(
-        f"""ᴀʙᴏᴜᴛ ᴛʜᴇ sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ : 
-
-ᴛʜɪs ʀᴇᴘᴏ ɪs ᴏɴʟʏ ᴍᴀᴅᴇ ғᴏʀ ᴅᴇᴘʟᴏʏɪɴɢ ᴀ ᴘᴏᴡᴇʀғᴜʟ ᴍᴜsɪᴄ ʙᴏᴛ ᴏɴ ʜᴇʀᴏᴋᴜ ᴡɪᴛʜᴏᴜᴛ ғᴀᴄɪɴɢ ʜᴇʀᴏᴋᴜ ᴀᴄᴄᴏᴜɴᴛ ʙᴀɴɴɪɴɢ ᴘʀᴏʙᴇʟᴍ.
-
-🔗 sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ : https://github.com/ITZ-ZAID/Zaid-Vc-Player""",
+        f"""İşte Tüm Komutlar 🇹🇷\n\n» /oynat => <Şarkı İsmi> Müzik oynatır.\n» /durdur => Müziği dururur.\n» /devam => Müziği sürdürür.\n» /atla => Müziği atlar.\n» /son => Müziği sonlandırır.\n» /bul => Müzik indirir.\n» /katil => Asistanı gruba davet eder.""",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("⬅️ ʙᴀᴄᴋ", callback_data="others")
+                    InlineKeyboardButton("🗑️ Kapat", callback_data="cls")
                 ],
             ]
         ),
-        disable_web_page_preview=True,
     )
+
