@@ -6,7 +6,7 @@ from Heroku.config import BOT_NAME, OWNER_USERNAME, UPDATE, SUPPORT, BOT_USERNAM
 HELP_TEXT = """
 Selam [{}](tg://user?id={})
 ➖➖➖➖➖➖➖➖➖➖➖➖➖➖
-✘ ✘ Merhaba ben 𝙂𝙧𝙪𝙥 𝙈𝙪̈𝙯𝙞𝙠 🇹🇷
+✘ ✘ Merhaba ben Monster Müzik 🇹🇷
 ‣ Grubunuzda müzik müzik oynatabilirim.
 ‣ Beni gruba yönetici olarak ekleyin ve kesintisiz müziğin tadını çıkarın.
 ➖➖➖➖➖➖➖➖➖➖➖➖➖➖
@@ -74,7 +74,7 @@ async def others(_, query: CallbackQuery):
                         "💝 Owner", url=f"https://t.me/emilyboss")
                 ],
                 [
-                    InlineKeyboardButton("⬅️ Geri", callback_data="home")
+                    InlineKeyboardButton("⬅️ Geri", callback_data="komut")
                 ]
            ]
         ),
@@ -119,7 +119,7 @@ Bu Sayede Grubunuz İçin Müzik Botu Yapabilirsiniz.""",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("🗑️ Kapat", callback_data="cls")
+                    InlineKeyboardButton("⬅️ Geri", callback_data="komut")
                 ],
             ]
         ),
